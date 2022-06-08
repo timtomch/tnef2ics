@@ -72,9 +72,14 @@ To do this, create a new workflow in Automator and choose to save it as an Appli
 for f in "$@"
 do
 	/path/to/python /path/to/tnef2ics.py "$f" /tmp/invite.ics
-	open /tmp/invite.ics
+    if [ $? -eq 0 ]; then
+    	open /tmp/invite.ics
+    fi
 done
 ```
+
+The if statement checks if the script exited without error before attempting to open the ICS file. Otherwise you risk opening an
+older ICS file without realizing.
 
 ![How to run this script as an Automator app](img/automator.png)
 
@@ -87,5 +92,6 @@ Save the application thus created. You will probably need to grant Full Disk Acc
 
 ## Changelog
 
+* 2022-06-08 - Fixed timezone issue
 * 2022-06-07 - Added instructions to run it as an Automator app
 * 2022-06-07 - First version of the script. It successfully parses simple calendar invitations. All other information is ignored.

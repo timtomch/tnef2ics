@@ -116,18 +116,19 @@ with open(infile, "rb") as tneffile:
         pass
 
     try:
-        tz = parse_tz(tzstring)
-        starttime = starttime.replace(tzinfo=tz)
-        endtime = endtime.replace(tzinfo=tz)
+        # Looks like regardless of the time zone description specified, times in the MAPI tags are UTC...
+        #tz = parse_tz(tzstring)
+        tz = pytz.timezone("UTC")
+        newevent.add('dtstart',tz.localize(starttime))
+        newevent.add('dtend',tz.localize(endtime))
     except:
-        # No timezone information found
-        pass
-        
-    newevent.add('dtstart',starttime)
-    newevent.add('dtend',endtime)
-    
-    newevent.add('description',HTMLFilter.convert_html_to_text(tnefobj.htmlbody))
+        # No date information found, are you sure this is a meeting invite?
+        print("No date information found, event not created.",file=sys.stderr)
+        sys.exit(1)
 
+# Add the message body as description, after converting the HTML to plain text with newlines.        
+newevent.add('description',HTMLFilter.convert_html_to_text(tnefobj.htmlbody))
+    
 # Add the event we just created to the calendar object
 newcal.add_component(newevent)
 
