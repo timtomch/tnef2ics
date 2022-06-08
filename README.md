@@ -71,7 +71,7 @@ To do this, create a new workflow in Automator and choose to save it as an Appli
 ```
 for f in "$@"
 do
-	/path/to/python /path/to/tnef2ics.py "$f" /tmp/invite.ics
+    /path/to/python /path/to/tnef2ics.py "$f" /tmp/invite.ics
     if [ $? -eq 0 ]; then
     	open /tmp/invite.ics
     fi
