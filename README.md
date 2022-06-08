@@ -6,7 +6,7 @@ invite in ICS format. Such files include data in a proprietary Microsoft format 
 
 ## The Problem
 
-Have you ever received an email with a mysterious attachment named _winmail.dat_? If that's the case, it's highly likely that the sender of that message
+Have you ever received an email with a mysterious attachment named _winmail.dat?_ If that's the case, it's highly likely that the sender of that message
 is using Microsoft Outlook and/or a Microsoft Exchange email server and that you are using a different email client (such as Apple Mail) on a computer 
 that isn't running the Windows operating system (such as macOS).
 
