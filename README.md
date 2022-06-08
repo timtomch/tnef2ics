@@ -24,8 +24,8 @@ able to add their invites to my calendar and respond to them, which is annoying 
 
 ## The Solution
 
-To resolve this situation, I wrote a short Python script that takes advantage of the [https://github.com/koodaamo/tnefparse](tnefparse) 
-and [https://icalendar.readthedocs.io/en/latest/](icalendar) libraries to extract the relevant information
+To resolve this situation, I wrote a short Python script that takes advantage of the [tnefparse](https://github.com/koodaamo/tnefparse)
+and [icalendar](https://icalendar.readthedocs.io/en/latest/) libraries to extract the relevant information
 from TNEF-encoded _winmail.dat_ attachments and convert it into an ICS invitation file, which I can then open normally in my calendar app.
 
 This is a quick and dirty solution that works for me for that particular client, but hasn't been tested on other _winmail.dat_ files. Also ideally
@@ -35,8 +35,8 @@ I intend to submit a pull request to tnefparse.
 ### Dependencies
 
 As stated above, this script relies on two nonstandard Python libraries:
-- [https://github.com/koodaamo/tnefparse](tnefparse)
-- [https://icalendar.readthedocs.io/en/latest/](icalendar)
+- [tnefparse](https://github.com/koodaamo/tnefparse)
+- [icalendar](https://icalendar.readthedocs.io/en/latest/)
 
 These consequently need to be installed on your machine if you want to be able to run this script. This can be done for example by using `pip`:
 
