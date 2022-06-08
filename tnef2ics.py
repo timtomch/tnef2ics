@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from icalendar import Calendar, Event
+from icalendar import Calendar, Event, vCalAddress, vText
 from tnefparse import TNEF
 from datetime import datetime, timezone, timedelta as td
 import re
@@ -104,14 +104,25 @@ with open(infile, "rb") as tneffile:
             endtime = value.data
         if value.name_str == 'MAPI_CREATOR_NAME':
             orgname = value.data
-        if value.name_str == 'MAPI_SENDER_EMAIL_ADDRESS"':
+        if value.name_str == 'MAPI_SENDER_EMAIL_ADDRESS':
             orgemail = value.data
 
-    if timezone != '':
+    try:
+        organizer = vCalAddress('MAILTO:' + orgemail)
+        organizer.params['cn'] = orgname
+        newevent.add('organizer',organizer)
+    except:
+        # One of the organizer parameters is missing, no biggie
+        pass
+
+    try:
         tz = parse_tz(tzstring)
         starttime = starttime.replace(tzinfo=tz)
         endtime = endtime.replace(tzinfo=tz)
-        #print(starttime.strftime('%Y%m%dT%H%M%SZ'))
+    except:
+        # No timezone information found
+        pass
+        
     newevent.add('dtstart',starttime)
     newevent.add('dtend',endtime)
     
