@@ -87,5 +87,5 @@ Save the application thus created. You will probably need to grant Full Disk Acc
 
 ## Changelog
 
-2022-06-07 - Added instructions to run it as an Automator app
-2022-06-07 - First version of the script. It successfully parses simple calendar invitations. All other information is ignored.
+* 2022-06-07 - Added instructions to run it as an Automator app
+* 2022-06-07 - First version of the script. It successfully parses simple calendar invitations. All other information is ignored.
