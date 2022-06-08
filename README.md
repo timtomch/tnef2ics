@@ -10,6 +10,8 @@ Have you ever received an email with a mysterious attachment named _winmail.dat?
 is using Microsoft Outlook and/or a Microsoft Exchange email server and that you are using a different email client (such as Apple Mail) on a computer 
 that isn't running the Windows operating system (such as macOS).
 
+![The dreaded winmail.dat attachment file](img/winmail.png)
+
 Such _winmail.dat_ files can include rich-text formatted email, attached files or calendar invites. [Several tools](https://en.wikipedia.org/wiki/Transport_Neutral_Encapsulation_Format#Decoding)
 are available to extract data from _winmail.dat_ files, such as Josh Jacob's [TNEF's Enough](http://www.joshjacob.com/mac-development/tnef.php) on macOS.
 However, while TNEF's Enough is able to extract the body of the offending email and any attached files, it is currently not able to extract calendar
@@ -34,7 +36,7 @@ I intend to submit a pull request to tnefparse.
 
 ### Dependencies
 
-As stated above, this script relies on two nonstandard Python libraries:
+As stated above, this script relies on two Python libraries:
 - [tnefparse](https://github.com/koodaamo/tnefparse)
 - [icalendar](https://icalendar.readthedocs.io/en/latest/)
 
@@ -60,6 +62,30 @@ write to a file called _invite.ics_ in the current directory.
 python tnef2ics.py input/winmail.dat output/invite.ics
 ```
 
+On macOS, it is also possible to use Automator to create a small app which can be used to run this script by using the "Open with"
+contextual menu on _winmail.dat_ files, or by drag and dropping such files on the application.
+
+To do this, create a new workflow in Automator and choose to save it as an Application. Find the Run Shell Script action, select 
+"Pass input as arguments" and write the following as the code to be run:
+
+```
+for f in "$@"
+do
+	/path/to/python /path/to/tnef2ics.py "$f" /tmp/invite.ics
+	open /tmp/invite.ics
+done
+```
+
+![How to run this script as an Automator app](img/automator.png)
+
+Be sure to replace the placeholder text with your actual paths to the Python binary and the tnef2ics.py script.
+
+Save the application thus created. You will probably need to grant Full Disk Access to it in order to work. Do so at your own risk:
+
+![Granting full disk access to the Automator app](img/fulldiskaccess.png)
+
+
 ## Changelog
 
+2022-06-07 - Added instructions to run it as an Automator app
 2022-06-07 - First version of the script. It successfully parses simple calendar invitations. All other information is ignored.
