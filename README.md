@@ -1,8 +1,7 @@
 # TNEF to ICS calendar invites in winmail.dat extractor
 
-This Python script parses calendar invite information included in winmail.dat files sent by some Exchange email servers and generates a calendar
-invite in ICS format. Such files include data in a proprietary Microsoft format called 
-[Transport Neutral Encapsulation Format (TNEF)](https://en.wikipedia.org/wiki/Transport_Neutral_Encapsulation_Format).
+This Python script parses calendar invite information included in winmail.dat files sent by some Exchange email servers and 
+generates a calendar invite in ICS format. 
 
 ## The Problem
 
@@ -12,8 +11,12 @@ that isn't running the Windows operating system (such as macOS).
 
 ![The dreaded winmail.dat attachment file](img/winmail.png)
 
-Such _winmail.dat_ files can include rich-text formatted email, attached files or calendar invites. [Several tools](https://en.wikipedia.org/wiki/Transport_Neutral_Encapsulation_Format#Decoding)
-are available to extract data from _winmail.dat_ files, such as Josh Jacob's [TNEF's Enough](http://www.joshjacob.com/mac-development/tnef.php) on macOS.
+Such _winmail.dat_ files use a proprietary Microsoft format called 
+[Transport Neutral Encapsulation Format (TNEF)](https://en.wikipedia.org/wiki/Transport_Neutral_Encapsulation_Format)
+and can include rich-text formatted email, attached files or calendar invites.
+[Several tools](https://en.wikipedia.org/wiki/Transport_Neutral_Encapsulation_Format#Decoding)
+are available to extract data from _winmail.dat_ files, such as Josh Jacob's 
+[TNEF's Enough](http://www.joshjacob.com/mac-development/tnef.php) on macOS.
 However, while TNEF's Enough is able to extract the body of the offending email and any attached files, it is currently not able to extract calendar
 invitations that are encoded directly within the TNEF payload (as opposed to an attached ICS calendar invite). The Gmail web client usually does a good
 job extracting this information and can be sometimes used to open calendar invites hidden in _winmail.dat_ files, but can sometimes miss critical information
@@ -63,7 +66,7 @@ python tnef2ics.py input/winmail.dat output/invite.ics
 ```
 
 On macOS, it is also possible to use Automator to create a small app which can be used to run this script by using the "Open with"
-contextual menu on _winmail.dat_ files, or by drag and dropping such files on the application.
+contextual menu on _winmail.dat_ files, or by drag and dropping such files onto it.
 
 To do this, create a new workflow in Automator and choose to save it as an Application. Find the Run Shell Script action, select 
 "Pass input as arguments" and write the following as the code to be run:
